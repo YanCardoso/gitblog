@@ -6,11 +6,11 @@ export function DefaultLayout() {
 	return (
 		<LayoutContainer>
 			<CoverContainer>
-				<MaxWidth>
-					<Header />
-					<Outlet />
-				</MaxWidth>
+				<Header />
 			</CoverContainer>
+			<MaxWidth>
+				<Outlet />
+			</MaxWidth>
 		</LayoutContainer>
 	)
 }
