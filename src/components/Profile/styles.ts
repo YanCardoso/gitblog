@@ -8,7 +8,6 @@ export const ProfileContainer = styled.div`
 	padding: 2rem;
 	gap: 2rem;
 	border-radius: 10px;
-	bottom: calc(13.25rem - 7.75rem);
 
 	img {
 		border-radius: 8px;
@@ -68,5 +67,10 @@ export const InfoContainer = styled.div`
 		display: flex;
 		gap: 0.5rem;
 		align-items: center;
+	}
+
+	div > svg {
+		width: 1.125rem;
+		height: 1.125rem;
 	}
 `
