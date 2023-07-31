@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import { DefaultLayout } from '../layouts/defaultLayout'
 import { Home } from '../pages/home'
+import { Posts } from '../pages/posts'
 
 export function Router() {
 	return (
@@ -12,6 +13,10 @@ export function Router() {
 				<Route
 					path='/'
 					element={<Home />}
+				/>
+				<Route
+					path='/posts'
+					element={<Posts />}
 				/>
 			</Route>
 		</Routes>

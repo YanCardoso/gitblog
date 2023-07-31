@@ -11,7 +11,7 @@ import {
 export function Home() {
 	return (
 		<HomeContainer>
-			<Profile />
+			<Profile variant='home'/>
 			<SearchBox />
 			<CardsGrid>
 				<CardPost>
