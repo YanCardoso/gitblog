@@ -15,4 +15,8 @@ export const GlobalStyles = createGlobalStyle`
   body, input, textarea, button {
     font: 400 1rem Nunito, sans-serif;
   }
+
+  input:focus {
+    outline: none;
+  }
 `

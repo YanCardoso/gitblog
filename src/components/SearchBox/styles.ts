@@ -42,6 +42,10 @@ export const SearchBoxContainer = styled.div`
 		background: var(--base-input, #040f1a);
 	}
 
+	input:focus {
+border: 1px solid var(--brand-blue, #3294F8);
+	}
+
 	input::placeholder {
 		color: var(--base-label, #3a536b);
 
