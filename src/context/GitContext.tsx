@@ -5,6 +5,14 @@ interface GitContextProvide {
   children: ReactNode
 }
 
+type PostProps = {
+  body: string
+  comments: number
+  created_at: string
+  number: number
+  title: string
+}
+
 type UserProps = {
   login: string
   avatar: string
@@ -20,12 +28,18 @@ type UserProps = {
 
 interface GitContextTypes {
   user: UserProps
+  posts: PostProps[]
+  createPost: (id: number) => void
+  currentBlogPost: PostProps | undefined
 }
 
 export const GitContext = createContext({} as GitContextTypes)
 
 export function GitContextProvider({ children }: GitContextProvide) {
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<PostProps[]>([])
+  const [currentBlogPost, setCurrentBlogPost] = useState<PostProps | undefined>(
+    {} as PostProps,
+  )
   const [user, setUser] = useState<UserProps>({} as UserProps)
 
   async function getUser() {
@@ -47,12 +61,34 @@ export function GitContextProvider({ children }: GitContextProvide) {
     setUser(result)
   }
 
+  function createPost(id: number) {
+    const currentPost = posts.find((p) => p.number === id)
+    setCurrentBlogPost(currentPost)
+  }
+
   async function getPosts() {
     const response = await api.get('/repos/YanCardoso/gitblog/issues')
     const { data } = response
-    console.log(data);
-    
-    setPosts(data)
+
+    const dataPost = data.map(
+      (data: {
+        body: string
+        comments: string
+        created_at: string
+        number: string
+        title: string
+      }) => {
+        return {
+          body: data.body,
+          comments: data.comments,
+          created_at: data.created_at,
+          number: data.number,
+          title: data.title,
+        }
+      },
+    )
+
+    setPosts(dataPost)
   }
 
   useEffect(() => {
@@ -60,5 +96,9 @@ export function GitContextProvider({ children }: GitContextProvide) {
     getPosts()
   }, [])
 
-  return <GitContext.Provider value={{ user }}>{children}</GitContext.Provider>
+  return (
+    <GitContext.Provider value={{ user, posts, createPost, currentBlogPost }}>
+      {children}
+    </GitContext.Provider>
+  )
 }

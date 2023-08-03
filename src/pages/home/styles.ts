@@ -18,11 +18,11 @@ export const CardPost = styled.main`
   flex-direction: column;
   padding: 2rem;
   border-radius: 10px;
-  background: var(--base-post, #112131);
+  background: ${(props) => props.theme['base-background']};
   border: 2px solid transparent;
 
   h2 {
-    color: var(--base-title, #e7edf4);
+    color: ${(props) => props.theme['base-title']};
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 160%; /* 2rem */
@@ -30,7 +30,7 @@ export const CardPost = styled.main`
   }
 
   &:hover {
-    border: 2px solid var(--base-label, #3a536b);
+    border: 2px solid ${(props) => props.theme['base-label']};
     cursor: pointer;
   }
 `
@@ -43,7 +43,7 @@ export const TextOverflow = styled.div`
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
-    color: var(--base-text, #afc2d4);
+    color: ${(props) => props.theme['base-text']};
     line-height: 160%; /* 1.6rem */
   }
 `
@@ -52,7 +52,7 @@ export const TimeAgoBadge = styled.span`
   position: absolute;
   right: 2rem;
   top: 2.31rem;
-  color: var(--base-span, #7b96b2);
+  color: ${(props) => props.theme['base-span']};
 
   font-size: 0.875rem;
   line-height: 160%; /* 1.4rem */

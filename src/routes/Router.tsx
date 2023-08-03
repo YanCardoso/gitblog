@@ -15,7 +15,7 @@ export function Router() {
 					element={<Home />}
 				/>
 				<Route
-					path='/posts'
+					path='/posts/:id'
 					element={<Posts />}
 				/>
 			</Route>

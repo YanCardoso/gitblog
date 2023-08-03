@@ -25,7 +25,7 @@ interface ProfileTypeProps {
 }
 
 export function Profile({ variant = 'home' }: ProfileTypeProps) {
-  const { user } = useContext(GitContext)
+  const { user, currentBlogPost } = useContext(GitContext)
 
   if (variant === 'home') {
     return (
@@ -74,11 +74,11 @@ export function Profile({ variant = 'home' }: ProfileTypeProps) {
               <FontAwesomeIcon icon={faUpRightFromSquare} />
             </LinkGitPost>
           </PostHeader>
-          <h1>JavaScript data types and data structures</h1>
+          <h1>{currentBlogPost?.title}</h1>
           <InfoContainer>
             <div>
               <FontAwesomeIcon icon={faGithubAlt} />
-              <span>YanCardoso</span>
+              <span>{user.login}</span>
             </div>
             <div>
               <FontAwesomeIcon icon={faCalendarDays} />
@@ -86,7 +86,7 @@ export function Profile({ variant = 'home' }: ProfileTypeProps) {
             </div>
             <div>
               <FontAwesomeIcon icon={faComment} />
-              <span>34 comentários</span>
+              <span>{currentBlogPost?.comments} comentários</span>
             </div>
           </InfoContainer>
         </ProfileContent>
