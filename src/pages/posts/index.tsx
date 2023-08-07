@@ -6,6 +6,7 @@ import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 
 export function Posts() {
   const { currentBlogPost } = useContext(GitContext)
+  console.log(currentBlogPost)
 
   if (currentBlogPost !== undefined) {
     return (
@@ -20,8 +21,6 @@ export function Posts() {
     return (
       <PostContainer>
         <Profile variant="post" />
-        <PostContent>
-        </PostContent>
       </PostContainer>
     )
   }

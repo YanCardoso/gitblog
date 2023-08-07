@@ -65,11 +65,11 @@ export function Profile({ variant = 'home' }: ProfileTypeProps) {
       <ProfileContainer variant={variant}>
         <ProfileContent variant="post">
           <PostHeader>
-            <LinkBack>
+            <LinkBack to={'/'}>
               <FontAwesomeIcon icon={faChevronLeft} />
               <span>VOLTAR</span>
             </LinkBack>
-            <LinkGitPost href="#">
+            <LinkGitPost href={`${currentBlogPost?.html_url}`}>
               <span>VER NO GITHUB</span>
               <FontAwesomeIcon icon={faUpRightFromSquare} />
             </LinkGitPost>

@@ -17,7 +17,7 @@ export function Home() {
 
   function handleChangeToPost(id: number) {
     createPost(id)
-    navigate('/posts/' + id)
+    navigate('/post/' + id)
   }
 
   return (

@@ -11,6 +11,7 @@ type PostProps = {
   created_at: string
   number: number
   title: string
+  html_url: string
 }
 
 type UserProps = {
@@ -77,6 +78,7 @@ export function GitContextProvider({ children }: GitContextProvide) {
         created_at: string
         number: string
         title: string
+        html_url: string
       }) => {
         return {
           body: data.body,
@@ -84,6 +86,7 @@ export function GitContextProvider({ children }: GitContextProvide) {
           created_at: data.created_at,
           number: data.number,
           title: data.title,
+          html_url: data.html_url,
         }
       },
     )

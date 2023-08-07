@@ -6,6 +6,5 @@ export const PostContainer = styled.div`
 `
 export const PostContent = styled.div`
   position: relative;
-	padding: 2.5rem 2rem;
-	color: ${(props) => props.theme['base-text']};
+  padding: 2.5rem 2rem;
 `
