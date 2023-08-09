@@ -18,7 +18,7 @@ export const CardPost = styled.main`
   flex-direction: column;
   padding: 2rem;
   border-radius: 10px;
-  background: ${(props) => props.theme['base-background']};
+  background: ${(props) => props.theme['base-post']};
   border: 2px solid transparent;
 
   h2 {
