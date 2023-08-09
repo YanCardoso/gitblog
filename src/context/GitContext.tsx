@@ -39,8 +39,10 @@ export const GitContext = createContext({} as GitContextTypes)
 export function GitContextProvider({ children }: GitContextProvide) {
   const [posts, setPosts] = useState<PostProps[]>([])
   const [currentBlogPost, setCurrentBlogPost] = useState<PostProps | undefined>(
-    {} as PostProps,
+    undefined,
   )
+  const [isDataLoaded, setIsDataLoaded] = useState(false)
+
   const [user, setUser] = useState<UserProps>({} as UserProps)
 
   async function getUser() {
@@ -62,36 +64,52 @@ export function GitContextProvider({ children }: GitContextProvide) {
     setUser(result)
   }
 
-  function createPost(id: number) {
-    const currentPost = posts.find((p) => p.number === id)
-    setCurrentBlogPost(currentPost)
+  async function searchPost() {
+    console.log('teste')
+  }
+
+  async function createPost(id: number) {
+    if (isDataLoaded) {
+      const newPost = posts.find((post) => post.number === id)
+      setCurrentBlogPost(newPost)
+    } else {
+      const response = await api.get(`/repos/YanCardoso/gitblog/issues/${id}`)
+      const { data } = response
+      const formatResponse: PostProps = {
+        body: data.body,
+        comments: data.comments,
+        created_at: data.created_at,
+        number: data.number,
+        title: data.title,
+        html_url: data.html_url,
+      }
+      setCurrentBlogPost(formatResponse)
+    }
+  }
+
+  function formatPost(posts: PostProps[]) {
+    const newPostsFormatted = posts.map((post) => {
+      return {
+        body: post.body,
+        comments: post.comments,
+        created_at: post.created_at,
+        number: post.number,
+        title: post.title,
+        html_url: post.html_url,
+      }
+    })
+
+    return newPostsFormatted
   }
 
   async function getPosts() {
     const response = await api.get('/repos/YanCardoso/gitblog/issues')
     const { data } = response
 
-    const dataPost = data.map(
-      (data: {
-        body: string
-        comments: string
-        created_at: string
-        number: string
-        title: string
-        html_url: string
-      }) => {
-        return {
-          body: data.body,
-          comments: data.comments,
-          created_at: data.created_at,
-          number: data.number,
-          title: data.title,
-          html_url: data.html_url,
-        }
-      },
-    )
+    const dataPost = formatPost(data)
 
     setPosts(dataPost)
+    setIsDataLoaded(true)
   }
 
   useEffect(() => {

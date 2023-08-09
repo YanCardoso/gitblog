@@ -1,12 +1,21 @@
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { Profile } from '../../components/Profile'
 import { PostContainer, PostContent } from './styles'
 import { GitContext } from '../../context/GitContext'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
+import { useParams } from 'react-router-dom'
 
 export function Posts() {
-  const { currentBlogPost } = useContext(GitContext)
-  console.log(currentBlogPost)
+  const { currentBlogPost, createPost } = useContext(GitContext)
+  const { id } = useParams()
+
+  function recreatePost() {
+    createPost(Number(id))
+  }
+
+  useEffect(() => {
+    recreatePost()
+  }, [])
 
   if (currentBlogPost !== undefined) {
     return (
