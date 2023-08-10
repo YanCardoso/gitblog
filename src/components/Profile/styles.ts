@@ -25,7 +25,8 @@ export const ProfileContainer = styled.div<ProfileContainerProps>`
       return css`
         display: flex;
         position: relative;
-        height: 10.5rem;
+        min-height: 10.5rem;
+        max-height: 11rem;
         background: ${(props) => props.theme['base-profile']};
         padding: 2rem;
         gap: 2rem;

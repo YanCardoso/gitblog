@@ -5,7 +5,7 @@ import { GitContext } from '../../context/GitContext'
 import { ReactMarkdown } from 'react-markdown/lib/react-markdown'
 import { useParams } from 'react-router-dom'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
-import { darcula, dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
+import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export function Posts() {
   const { currentBlogPost, createPost } = useContext(GitContext)
@@ -36,7 +36,7 @@ export function Posts() {
                     style={dracula}
                     language={match[1]}
                     PreTag="div"
-                    customStyle={{backgroundColor: '#112131'}}
+                    customStyle={{ backgroundColor: '#112131' }}
                   />
                 ) : (
                   <code
