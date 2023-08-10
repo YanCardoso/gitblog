@@ -27,6 +27,10 @@ export const CardPost = styled.main`
     font-weight: 700;
     line-height: 160%; /* 2rem */
     max-width: 17.6875rem;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   &:hover {

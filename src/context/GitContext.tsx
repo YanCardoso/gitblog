@@ -31,6 +31,7 @@ interface GitContextTypes {
   user: UserProps
   posts: PostProps[]
   createPost: (id: number) => void
+  searchPost: (query: string) => void
   currentBlogPost: PostProps | undefined
 }
 
@@ -64,8 +65,16 @@ export function GitContextProvider({ children }: GitContextProvide) {
     setUser(result)
   }
 
-  async function searchPost() {
-    console.log('teste')
+  async function searchPost(query: string) {
+    if (query !== '') {
+      const queryEncode = encodeURIComponent(query)
+      const response = await api.get(
+        `/search/issues?q=repo:yancardoso/gitblog+is:issue+${queryEncode}+in:title,body`,
+      )
+      const dataResult = response.data
+      const dataformat = formatPost(dataResult.items)
+      setPosts(dataformat)
+    }
   }
 
   async function createPost(id: number) {
@@ -118,7 +127,9 @@ export function GitContextProvider({ children }: GitContextProvide) {
   }, [])
 
   return (
-    <GitContext.Provider value={{ user, posts, createPost, currentBlogPost }}>
+    <GitContext.Provider
+      value={{ user, posts, createPost, currentBlogPost, searchPost }}
+    >
       {children}
     </GitContext.Provider>
   )
